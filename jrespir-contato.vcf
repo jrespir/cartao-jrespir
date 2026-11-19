@@ -1,10 +1,10 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:JRESPIR Serviços Administrativos
-N:;JRESPIR Serviços Administrativos;;;
+N:Espir;José Roberto;;;
+FN:José Roberto Espir
 ORG:JRESPIR Serviços Administrativos
 TITLE:Administração de Bens Próprios
 TEL;TYPE=WORK,VOICE:+551136619963
-EMAIL;TYPE=WORK:jre@lagonegroelongano.com.br
-NOTE:José Roberto Espir
+EMAIL;TYPE=WORK:jrespir@terra.com.br
+URL:https://jrespir.github.io/cartao-jrespir/
 END:VCARD
