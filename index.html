@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#102b46">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icone-192.png">
+<link rel="apple-touch-icon" href="icone-192.png">
 <meta name="description" content="JRESPIR Serviços Administrativos — Administração de Bens Próprios. Contato de José Roberto Espir.">
 <title>JRESPIR | Serviços Administrativos</title>
 <style>
@@ -27,6 +30,15 @@ main{width:100%;max-width:380px}
 .details{min-width:0}
 .label{display:block;color:var(--gold);font-size:9px;letter-spacing:.075em;line-height:1.4;margin-bottom:3px}
 .value{display:block;font-size:clamp(12px,3.6vw,14px);line-height:1.4;overflow-wrap:anywhere}
+.qr-button{cursor:pointer;font:inherit;width:100%}
+.qr-overlay[hidden]{display:none}
+.qr-overlay{position:fixed;inset:0;background:#071a2edb;z-index:20;display:grid;place-items:center;padding:16px;overflow-y:auto}
+.qr-panel{width:min(100%,390px);border-radius:18px;background:#102b46;color:white;text-align:center;padding:24px 20px;box-shadow:0 18px 60px #0007;border:1px solid #d6b77d77}
+.qr-panel h2{font-size:19px;font-weight:500;margin:0 0 8px}
+.qr-panel p{font-size:13px;color:#d8e0e9;line-height:1.5;margin:0 0 18px}
+.qr-panel img{display:block;width:min(100%,270px);height:auto;margin:0 auto 14px;background:white;border-radius:10px}
+.qr-close{margin-top:12px;min-height:44px;padding:10px 24px;border:1px solid #d6b77d;border-radius:9px;background:transparent;color:#fff;font:inherit;cursor:pointer}
+.qr-url{font-size:11px;overflow-wrap:anywhere;color:#d6b77d}
 .footer{font-size:10px;color:#b9c5d0;letter-spacing:.025em;margin:0}
 @media(max-width:340px){body{padding:8px}.card{padding:20px 14px 18px;border-radius:14px}.action{padding:10px 11px;gap:10px;min-height:60px}.divider{margin:18px 0 16px}}
 @media(max-height:650px) and (min-width:550px){body{align-items:flex-start}}
@@ -54,10 +66,32 @@ main{width:100%;max-width:380px}
 <span class="symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
 <span class="details"><span class="label">ADICIONAR À AGENDA</span><span class="value">José Roberto Espir</span></span>
 </a>
+<button class="action qr-button" type="button" id="showQr" aria-haspopup="dialog" aria-controls="qrDialog">
+<span class="symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM19 14h2v2M19 19h2v2M14 19h2v2"/></svg></span>
+<span class="details"><span class="label">COMPARTILHAR MEU CARTÃO</span><span class="value">Mostrar QR Code</span></span>
+</button>
 </nav>
 <div class="divider" aria-hidden="true"></div>
 <p class="footer">José Roberto Espir</p>
 </section>
 </main>
+<div class="qr-overlay" id="qrDialog" role="dialog" aria-modal="true" aria-labelledby="qrTitle" hidden>
+<div class="qr-panel">
+<h2 id="qrTitle">Cartão digital JRESPIR</h2>
+<p>Peça ao cliente para apontar a câmera do celular para este código.</p>
+<img src="qrcode-jrespir.png" width="270" height="270" alt="QR Code para abrir o cartão digital completo da JRESPIR">
+<div class="qr-url">jrespir.github.io/cartao-jrespir/</div>
+<button type="button" class="qr-close" id="closeQr">Fechar QR Code</button>
+</div>
+</div>
+<script>
+(()=>{const dialog=document.getElementById('qrDialog');const open=document.getElementById('showQr');const close=document.getElementById('closeQr');
+function hide(){dialog.hidden=true;open.focus();document.body.style.overflow=''}
+open.addEventListener('click',()=>{dialog.hidden=false;document.body.style.overflow='hidden';close.focus()});
+close.addEventListener('click',hide);
+dialog.addEventListener('click',e=>{if(e.target===dialog)hide()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.hidden)hide()});
+})();
+</script>
 </body>
 </html>
