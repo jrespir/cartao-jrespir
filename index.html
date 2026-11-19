@@ -70,6 +70,10 @@ main{width:100%;max-width:380px}
 <span class="symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM19 14h2v2M19 19h2v2M14 19h2v2"/></svg></span>
 <span class="details"><span class="label">COMPARTILHAR MEU CARTÃO</span><span class="value">Mostrar QR Code</span></span>
 </button>
+<button class="action qr-button" type="button" id="shareCard" aria-label="Compartilhar o cartão virtual completo da JRESPIR">
+<span class="symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="19" r="2"/><path d="m8 11 8-5M8 13l8 5"/></svg></span>
+<span class="details"><span class="label">ENVIAR PARA OUTRA PESSOA</span><span class="value">Compartilhar cartão</span></span>
+</button>
 </nav>
 <div class="divider" aria-hidden="true"></div>
 <p class="footer">José Roberto Espir</p>
@@ -91,6 +95,20 @@ open.addEventListener('click',()=>{dialog.hidden=false;document.body.style.overf
 close.addEventListener('click',hide);
 dialog.addEventListener('click',e=>{if(e.target===dialog)hide()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.hidden)hide()});
+})();
+(()=>{
+ const btn=document.getElementById('shareCard');
+ const url='https://jrespir.github.io/cartao-jrespir/';
+ btn.addEventListener('click',async()=>{
+  if(navigator.share){
+   try{await navigator.share({title:'JRESPIR Serviços Administrativos',text:'Cartão digital de José Roberto Espir — JRESPIR Serviços Administrativos',url});return;}
+   catch(err){if(err && err.name==='AbortError')return;}
+  }
+  try{
+   if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(url);alert('Link do cartão copiado. Você pode colá-lo no WhatsApp ou em uma mensagem.');return;}
+  }catch(err){}
+  window.prompt('Copie o endereço do cartão para compartilhar:',url);
+ });
 })();
 </script>
 </body>
